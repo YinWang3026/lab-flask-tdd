@@ -83,7 +83,7 @@ class Pet(db.Model):
     # INSTANCE METHODS
     ##################################################
 
-    def __repr__(self):
+    def __repr__(self): # Special method used to represent a class's object as a string, called by repr() internal method
         return "<Pet %r id=[%s]>" % (self.name, self.id)
 
     def create(self):
