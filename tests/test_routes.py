@@ -28,7 +28,7 @@ import os
 import logging
 import unittest
 
-# from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch
 from urllib.parse import quote_plus
 from service import status  # HTTP Status Codes
 from service.models import db, init_db
@@ -248,9 +248,9 @@ class TestPetServer(unittest.TestCase):
     #     resp = self.app.get(BASE_URL, query_string='name=fido')
     #     self.assertEqual(resp.status_code, status.HTTP_400_BAD_REQUEST)
 
-    # @patch('service.routes.Pet.find_by_name')
-    # def test_mock_search_data(self, pet_find_mock):
-    #     """ Test showing how to mock data """
-    #     pet_find_mock.return_value = [MagicMock(serialize=lambda: {'name': 'fido'})]
-    #     resp = self.app.get(BASE_URL, query_string='name=fido')
-    #     self.assertEqual(resp.status_code, status.HTTP_200_OK)
+    @patch('service.routes.Pet.find_by_name')
+    def test_mock_search_data(self, pet_find_mock):
+        """ Test showing how to mock data """
+        pet_find_mock.return_value = [MagicMock(serialize=lambda: {'name': 'fido'})]
+        resp = self.app.get(BASE_URL, query_string='name=fido')
+        self.assertEqual(resp.status_code, status.HTTP_200_OK)
